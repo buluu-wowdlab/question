@@ -122,7 +122,7 @@
 ├─────────────────────────────┤
 │ ② 질문 작성 영역             │
 │   [질문 입력 텍스트박스]      │
-│   0/200         [질문 등록]  │
+│   0/500         [질문 등록]  │
 ├─────────────────────────────┤
 │ ③ 질문 목록 영역 (오늘 질문)  │
 │   ┌───────────────────────┐ │
@@ -140,7 +140,7 @@
 
 ### 5.2 질문 작성 영역
 
-- 질문 입력 텍스트박스 + 글자 수 표시 (0/200)
+- 질문 입력 텍스트박스 + 글자 수 표시 (0/500)
 - 질문 등록 버튼 (등록 중에는 비활성화하여 중복 등록 방지)
 - 등록 성공 시 입력창 비움 / 실패 시 안내 문구 표시
 
@@ -176,7 +176,7 @@
 |---|---|---|
 | `id` | bigint (자동 증가) | 질문 고유 ID |
 | `session_date` | date | 수업 날짜 (한국 시간 기준, 자동 입력) |
-| `question_text` | text | 질문 내용 (공백 제외 1~200자) |
+| `question_text` | text | 질문 내용 (공백 제외 1~500자) |
 | `author_name` | text | 작성자 이름 (1~20자) |
 | `vote_count` | integer | 공감 수 (기본값 0) |
 | `created_at` | timestamptz | 등록 시각 (자동 입력) |
@@ -192,7 +192,7 @@
 create table if not exists public.questions (
   id bigint generated always as identity primary key,
   session_date date not null default (now() at time zone 'Asia/Seoul')::date,
-  question_text text not null check (char_length(btrim(question_text)) between 1 and 200),
+  question_text text not null check (char_length(btrim(question_text)) between 1 and 500),
   author_name text not null check (char_length(btrim(author_name)) between 1 and 20),
   vote_count integer not null default 0 check (vote_count >= 0),
   created_at timestamptz not null default now()
@@ -263,7 +263,7 @@ end $$;
 | 입력 | 질문 내용, 작성자 이름(저장된 이름) |
 | 처리 | Supabase `questions` 테이블에 insert |
 | 출력 | 모든 사용자 목록에 실시간 추가 |
-| 예외 처리 | 공백만 입력 불가 · 200자 제한(입력창 + DB 이중 검증) · 네트워크 오류 시 안내 |
+| 예외 처리 | 공백만 입력 불가 · 500자 제한(입력창 + DB 이중 검증) · 네트워크 오류 시 안내 |
 
 ### 7.2 공감 투표
 

@@ -2,7 +2,7 @@
 create table if not exists public.questions (
   id bigint generated always as identity primary key,
   session_date date not null default (now() at time zone 'Asia/Seoul')::date,
-  question_text text not null check (char_length(btrim(question_text)) between 1 and 200),
+  question_text text not null check (char_length(btrim(question_text)) between 1 and 500),
   author_name text not null check (char_length(btrim(author_name)) between 1 and 20),
   vote_count integer not null default 0 check (vote_count >= 0),
   created_at timestamptz not null default now()

@@ -135,13 +135,13 @@ export default function App() {
   )
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-md bg-gray-50 px-4 py-6 lg:max-w-3xl lg:px-10 lg:py-10">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2 lg:mb-6">
-        <h1 className="text-lg font-bold text-gray-900 lg:text-3xl">Question Vote</h1>
+    <div className="mx-auto min-h-screen w-full max-w-md bg-gray-50 px-4 py-6 md:max-w-xl md:px-6 md:py-8 lg:max-w-3xl lg:px-10 lg:py-10">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2 md:mb-5 lg:mb-6">
+        <h1 className="text-lg font-bold text-gray-900 md:text-xl lg:text-3xl">Question Vote</h1>
         <button
           type="button"
           onClick={handleToggleDisplayMode}
-          className="shrink-0 rounded-full border border-gray-300 bg-white px-3 py-1 text-xs font-medium text-gray-600 lg:px-4 lg:py-2 lg:text-sm"
+          className="shrink-0 rounded-full border border-gray-300 bg-white px-3 py-1 text-xs font-medium text-gray-600 md:px-3.5 md:py-1.5 md:text-sm lg:px-4 lg:py-2"
         >
           {displayMode ? '전체 화면으로' : '질문만 보기'}
         </button>
@@ -155,10 +155,12 @@ export default function App() {
       )}
 
       <section>
-        <h2 className="mb-2 text-sm font-semibold text-gray-500 lg:mb-3 lg:text-lg">오늘의 질문</h2>
+        <h2 className="mb-2 text-sm font-semibold text-gray-500 md:mb-2.5 md:text-base lg:mb-3 lg:text-lg">
+          오늘의 질문
+        </h2>
 
-        {loading && <p className="text-sm text-gray-400 lg:text-lg">불러오는 중...</p>}
-        {error && <p className="mb-2 text-sm text-red-500 lg:text-lg">{error}</p>}
+        {loading && <p className="text-sm text-gray-400 md:text-base lg:text-lg">불러오는 중...</p>}
+        {error && <p className="mb-2 text-sm text-red-500 md:text-base lg:text-lg">{error}</p>}
 
         {!loading && (
           <QuestionList
